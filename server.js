@@ -26,17 +26,23 @@ app.post("/submit-form", async (req, res) => {
     const { firstName, lastName, email, phone } = req.body;
 
     const transporter = nodemailer.createTransport({
-        host: "smtpout.secureserver.net",
-        port: 587,
+        host: "localhost",  
+        secure: false,
+        port: 25,
+        debug: true,
         auth: {
             user: process.env.EMAIL,
-            pass: process.env.PASSWORD,
+            pass: process.env.PASSWORD, 
         },
+        logger: true,
+        debug: true,
     });
+
+    //fpynlrghdblrrcdq
 
     const mailOptions = {
         from: email,
-        to: "wettems35@gmail.com",
+        to: "casey@libertygoldus.com",
         subject: "New Consultation Request",
         text: `You received a new consultation request:\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}`,
     };
