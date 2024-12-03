@@ -26,9 +26,13 @@ app.post("/submit-form", async (req, res) => {
     const { firstName, lastName, email, phone } = req.body;
 
     const transporter = nodemailer.createTransport({
-        host: "localhost",  
-        secure: false,
-        port: 25,
+        service: "Gmail",
+        host: "smtp.gmail.com",  
+        port: 465,
+        secure: true,
+        tls: {
+            rejectUnauthorized: false,
+        },
         debug: true,
         auth: {
             user: process.env.EMAIL,
