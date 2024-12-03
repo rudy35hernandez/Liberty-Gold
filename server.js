@@ -20,23 +20,19 @@ app.use(express.static("public"))
 console.log("EMAIL:", process.env.EMAIL);
 console.log("PASSWORD:", process.env.PASSWORD);
 
-app.post("/submit-form", async(req, res) => {
+app.post("/submit-form", async (req, res) => {
     console.log("Route HIT!!!!")
     console.log("Raw Body:", req.body)
     const { firstName, lastName, email, phone } = req.body;
-    
-    
 
-    // zjyx pjge ihrx spwq
-
-    // configure nodemailer transporter
     const transporter = nodemailer.createTransport({
-        service: "gmail",
+        host: "smtpout.secureserver.net",
+        port: 587,
         auth: {
             user: process.env.EMAIL,
             pass: process.env.PASSWORD,
         },
-    })
+    });
 
     const mailOptions = {
         from: email,
@@ -47,10 +43,10 @@ app.post("/submit-form", async(req, res) => {
 
     try {
         await transporter.sendMail(mailOptions);
-        res.send(`<h1>Thank you! We will reach out to you as soon as possible. </h1>`);
-    } catch(error){
+        res.status(200).json({ success: true }); // Send JSON response
+    } catch (error) {
         console.error("Error sending email:", error);
-        res.status(500).send(`<h1>Something went wrong. Please try again later. </h1>`);
+        res.status(500).json({ success: false, error: "Failed to send email." }); // Send JSON error response
     }
 });
 
@@ -59,4 +55,8 @@ app.post("/submit-form", async(req, res) => {
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
+
+
+
+
 

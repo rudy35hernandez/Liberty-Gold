@@ -9,33 +9,49 @@
     });
 
 
-    document.getElementById("consultation-form").addEventListener("submit", async function(event){
-        event.preventDefault()
-
-        const formData = FormData(event.target) // form data from form
-        const data = Object.fromEntries(formData.entries())
-
+    document.getElementById("consultation-form").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent default form submission behavior
+        console.log("Form submission intercepted!"); // Debugging log
+    
+        // Gather form data
+        const formData = new FormData(event.target); // Collect form data
+        const data = Object.fromEntries(formData.entries()); // Convert to a plain object
+        console.log("Collected data:", data); // Debugging log
+    
         try {
+            // Send data to the server via fetch
             const response = await fetch("/submit-form", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application.json",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify(data),
             });
 
-            if(response.ok){
-                //update page with thank you message
-                document.querySelector(".form-section").innerHTML = `
-                <h2> Thank you for reaching out!</h2> 
-                <p> We will contact you shortly.</p>
-                `
+            console.log("Response received:", response); // Debugging log
+
+    
+            if (response.ok) {
+                const result = await response.json(); // Parse JSON response
+                console.log("Parsed response:", result); // Debugging log
+                
+                if (result.success) {
+                    // Update only the form section
+                    document.querySelector(".form-section").innerHTML = `
+                        <div id="thank-you-message">
+                            <h3>Thank you!</h3>
+                            <p>We will reach out to you as soon as possible.</p>
+                        </div>
+                    `;
+                } else {
+                    throw new Error(result.error || "Something went wrong.");
+                }
             } else {
-                throw new Error("Failed to submit form");
-            } 
-        }  catch (error) {
-            console.error("Error submitting the form", error);
-            alert("Something went wrong. Please try again later.")
+                throw new Error("Failed to submit the form.");
+            }
+        } catch (error) {
+            console.error("Error submitting the form:", error);
+            alert("Something went wrong. Please try again later.");
         }
-    })
+    });
         
