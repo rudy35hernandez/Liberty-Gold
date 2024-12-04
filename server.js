@@ -5,7 +5,7 @@ require("dotenv").config();
 
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 // middleware to parse form data
 
@@ -26,14 +26,7 @@ app.post("/submit-form", async (req, res) => {
     const { firstName, lastName, email, phone } = req.body;
 
     const transporter = nodemailer.createTransport({
-        service: "Gmail",
-        host: "smtp.gmail.com",  
-        port: 465,
-        secure: true,
-        tls: {
-            rejectUnauthorized: false,
-        },
-        debug: true,
+        service: "gmail",
         auth: {
             user: process.env.EMAIL,
             pass: process.env.PASSWORD,
@@ -62,8 +55,8 @@ app.post("/submit-form", async (req, res) => {
 
 // start server
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
 });
 
 
