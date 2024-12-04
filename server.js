@@ -17,8 +17,8 @@ app.use(express.static("public"))
 
 // endpoint to handle form submission
 
-console.log("EMAIL:", process.env.EMAIL);
-console.log("PASSWORD:", process.env.PASSWORD);
+// console.log("EMAIL:", process.env.EMAIL);
+// console.log("PASSWORD:", process.env.PASSWORD);
 
 app.post("/submit-form", async (req, res) => {
     console.log("Route HIT!!!!")
@@ -35,8 +35,8 @@ app.post("/submit-form", async (req, res) => {
         },
         debug: true,
         auth: {
-            user: process.env.DB_USER,
-            pass: process.env.DB_PASSWORD, 
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD, 
         },
         logger: true,
         debug: true,
