@@ -142,9 +142,7 @@ a{
     text-decoration: none;
 }
 
-a:visited{
-    color: inherit
-}
+
 
 a.booking-link,
 a.contact-button{
@@ -165,6 +163,10 @@ a.booking-link{
 a.contact-button{
     color: white;
     background-color: #2F576F;
+}
+
+a:visited{
+    color: inherit
 }
 
 .phone{
