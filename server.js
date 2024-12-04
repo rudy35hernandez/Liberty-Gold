@@ -36,7 +36,7 @@ app.post("/submit-form", async (req, res) => {
         debug: true,
         auth: {
             user: process.env.EMAIL,
-            pass: process.env.PASSWORD, 
+            pass: process.env.PASSWORD,
         },
         logger: true,
         debug: true,
