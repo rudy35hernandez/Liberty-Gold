@@ -139,14 +139,12 @@ footer {
 }
 
 a{
-    color: inherit;
     text-decoration: none;
 }
 
 
-
-a.booking-link,
-a.contact-button{
+.booking-link,
+.contact-button{
     display: inline-block;
     font-size: 1.2rem;
     text-decoration: none;
@@ -155,19 +153,25 @@ a.contact-button{
     max-width: fit-content;
 }
 
-a.booking-link{
+.booking-link{
     color:#2F576F;
     background: white;
     align-self: center;
+    text-decoration: none;
 }
 
-a.contact-button{
+.contact-button{
     color: white;
     background-color: #2F576F;
+    text-decoration: none;
 }
 
-a:visited{
-    color: inherit
+.booking-link:visited{
+    color: #2F576F
+}
+
+.contact-button:visited{
+    color: white
 }
 
 .phone{
