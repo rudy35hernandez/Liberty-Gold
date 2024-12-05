@@ -422,6 +422,10 @@ p{
         padding: 5%;
     }
 
+    .main h2{
+        text-align: center;
+    }
+
     .sections-container {
         gap: 0.5rem;
     }
