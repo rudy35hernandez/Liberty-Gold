@@ -138,6 +138,10 @@ footer {
     margin-right: 2rem;
 }
 
+.header-list a{
+    color: #2F576F
+}
+
 a{
     text-decoration: none;
 }
